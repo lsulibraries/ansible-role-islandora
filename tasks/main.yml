@@ -1,0 +1,4 @@
+---
+- include: mods.yml
+- include: libs.yml
+- include: proxy.yml
