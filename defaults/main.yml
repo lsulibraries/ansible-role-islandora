@@ -75,3 +75,4 @@ third_party_mods:
     - datepicker
     - xmlsitemap
     - features
+    - blockexport
