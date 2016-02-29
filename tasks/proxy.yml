@@ -1,5 +1,4 @@
 ---
-
 - name: copy httpd proxy settings into confs dir
   copy: 
     src: islandora.conf

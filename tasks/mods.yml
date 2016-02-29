@@ -113,11 +113,6 @@
     dest: "{{modules_dir}}/islandora_mods_display"  
     update: no
 
-- name: Cloning local modules
-  git: clone=yes repo="https://github.com/lsulibraries/{{item}}.git" dest="{{modules_dir}}/{{item}}" update=no
-  with_items: "{{ local_mods }}"
-
-
   # in order to 'generate' features in place:
 - name: ensure that sites/all/modules dir is writable by the web server
   file:
