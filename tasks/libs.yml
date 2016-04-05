@@ -169,7 +169,7 @@
 - name: Fetch and enable ldl drupal  modules
   shell: "drush dl -n {{ item }} && drush -y en {{ item }}"
   args:
-    chdir: "{{ drupal_core_path }}"
+    chdir: "{{ modules_dir }}"
   with_items: "{{ ldl_specific_mods }}"
 
 
