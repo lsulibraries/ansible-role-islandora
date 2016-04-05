@@ -71,9 +71,10 @@ islandora_mods:
     - islandora_altmetrics
     - islandora_populator
 
-third_party_mods:
+ldl_specific_mods:
     - date
     - datepicker
     - xmlsitemap
     - features
     - blockexport
+    - diff
