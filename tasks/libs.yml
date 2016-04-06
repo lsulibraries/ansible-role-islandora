@@ -158,7 +158,6 @@
     - islandora_form_fieldpanel
     - islandora_altmetrics
     - islandora_populator
-    - islandora_mods_display
 
 - name: Now that the module is downloaded and enabled, ensure that colorbox lib is downloaded and in place.
   shell: "drush -y -v colorbox-plugin"
