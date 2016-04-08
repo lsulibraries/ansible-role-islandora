@@ -1,6 +1,6 @@
 ---
 - name: Cloning islandora modules
-  git: clone=yes repo="https://github.com/islandora/{{item}}.git" dest="{{modules_dir}}/{{item}}" version=7.x update=no
+  git: clone=yes repo="https://github.com/islandora/{{item}}.git" dest="{{modules_dir}}/{{item}}" version=7.x update=no recursive=yes
   with_items:
     - islandora
     - islandora_bagit
