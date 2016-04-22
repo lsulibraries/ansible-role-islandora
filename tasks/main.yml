@@ -2,3 +2,5 @@
 - include: mods.yml
 - include: libs.yml
 - include: proxy.yml
+- include: php-devtools.yml
+  when: "{{ install_php_devtools }}"
