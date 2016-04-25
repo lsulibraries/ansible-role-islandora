@@ -1,0 +1,71 @@
+---
+
+- name: Ensure that libraries directory exists.
+  file: 
+    path: "{{libraries_dir}}"
+    state: directory
+    owner: ansible
+    group: www-data
+
+- name: clone tuque
+  git:  clone=yes update=no repo="https://github.com/Islandora/tuque.git" dest="{{libraries_dir}}/tuque"
+
+- name: clone bagit lib
+  git:  clone=yes update=no repo="https://github.com/scholarslab/BagItPHP.git" dest="{{libraries_dir}}/bagit"
+
+- name: fmode 
+  shell: git config core.filemode false
+  args:
+    chdir: "{{libraries_dir}}/tuque"
+
+- name: fmode
+  shell: git config core.filemode false
+  args:
+    chdir: "{{libraries_dir}}/tuque"
+
+- name: Make global drush commands dir for islandora
+  file: 
+    path: /usr/local/share/drush/commands/islandora
+    state: directory
+    recurse: yes
+
+- name: Move libraries drush defs into global dir
+  shell: "cp {{modules_dir}}/{{item}} /usr/local/share/drush/commands/islandora/"
+  with_items:
+    - islandora_openseadragon/islandora_openseadragon.drush.inc
+    - islandora_pdfjs/islandora_pdfjs.drush.inc
+    - islandora_videojs/islandora_videojs.drush.inc
+    - islandora_internet_archive_bookreader/islandora_internet_archive_bookreader.drush.inc
+
+- name: Clear drush cache to register new commands.
+  shell: drush cc drush
+  args:
+    chdir: '{{drupal_core_path}}'
+
+- name: Ensure that unzip is available.
+  apt: 
+    name: unzip
+
+- name: Ensure that videojs library is downloaded and in place.
+  shell: "drush -y -v videojs-plugin"
+  args:
+    chdir: "{{drupal_core_path}}"
+    creates: "{{libraries_dir}}/video-js"
+
+- name: Ensure that pdf  library is downloaded and in place.
+  shell: "drush -y -v pdfjs-plugin"
+  args:
+    chdir: "{{drupal_core_path}}"
+    creates: "{{libraries_dir}}/pdfjs"
+
+- name: Ensure that bookreader library is downloaded and in place.
+  shell: "drush -y -v iabookreader-plugin"
+  args:
+    chdir: "{{drupal_core_path}}"
+    creates: "{{libraries_dir}}/bookreader"
+
+- name: Ensure that seadragon lib is downloaded and in place.
+  shell: "drush -y -v openseadragon-plugin"
+  args:
+    chdir: "{{drupal_core_path}}"
+    creates: "{{libraries_dir}}/openseadragon"
