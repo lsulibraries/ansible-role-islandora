@@ -8,10 +8,18 @@
     group: www-data
 
 - name: clone tuque
-  git:  clone=yes update=no repo="https://github.com/Islandora/tuque.git" dest="{{libraries_dir}}/tuque"
+  git:  
+    clone: yes 
+    update: no
+    repo: "https://github.com/Islandora/tuque.git"
+    dest: "{{libraries_dir}}/tuque"
 
 - name: clone bagit lib
-  git:  clone=yes update=no repo="https://github.com/scholarslab/BagItPHP.git" dest="{{libraries_dir}}/bagit"
+  git:  
+    clone: yes
+    update: no
+    repo: "https://github.com/scholarslab/BagItPHP.git"
+    dest: "{{libraries_dir}}/bagit"
 
 - name: fmode 
   shell: git config core.filemode false
