@@ -4,7 +4,7 @@
   file: 
     path: "{{libraries_dir}}"
     state: directory
-    owner: ansible
+    owner: www-data
     group: www-data
 
 - name: clone tuque
