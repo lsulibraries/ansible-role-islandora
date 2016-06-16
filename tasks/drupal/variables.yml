@@ -1,0 +1,8 @@
+---
+- name: Set variables for Islandora modules
+  shell: "drush eval \"{{ item[1] }}\""
+  args:
+    chdir: "{{ drupal_core_path }}/sites/{{ item[0] }}"
+  with_nested:
+    - "{{ institutions }}"
+    - "{{ base_variables }}"

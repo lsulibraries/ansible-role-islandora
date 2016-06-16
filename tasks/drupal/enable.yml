@@ -1,0 +1,64 @@
+---
+- name: Enable dependency modules
+  shell: "drush -y -u 1 --quiet en {{ dependencies }}"
+  args:
+    chdir: "{{drupal_core_path }}/sites/{{ item }}"
+  with_items: "{{ institutions }}"
+
+- name: enable islandora
+  shell: "drush -y -u 1 en {{ base }}"
+  args:
+    chdir: "{{drupal_core_path}}/sites/{{ item }}"
+  with_items: "{{ institutions }}"
+
+- name: Enable prereq islandora modules
+  shell: "drush -y -u 1 --quiet en {{ prereqs }}"
+  args:
+    chdir: "{{drupal_core_path }}/sites/{{ item }}"
+  with_items: "{{ institutions }}"
+
+- name: Enable solr modules
+  shell: "drush -y -u 1 --quiet en {{ solr_modules }}"
+  args:
+    chdir: "{{drupal_core_path }}/sites/{{ item }}"
+  with_items: "{{ institutions }}"
+
+- name: Enable solution_packs
+  shell: "drush -y -u 1 --quiet en {{ item[1  ] }}"
+  args:
+    chdir: "{{drupal_core_path }}/sites/{{ item[0] }}"
+  with_nested: 
+    - "{{ institutions }}"
+    - "{{ solution_packs }}"
+
+- name: Enable preservation modules
+  shell: "drush -y -u 1 --quiet en {{ preservation }}"
+  args:
+    chdir: "{{drupal_core_path }}/sites/{{ item }}"
+  with_items: "{{ institutions }}"
+
+- name: Enable js utils modules
+  shell: "drush -y -u 1 --quiet en {{ jsutils }}"
+  args:
+    chdir: "{{drupal_core_path }}/sites/{{ item }}"
+  with_items: "{{ institutions }}"
+
+- name: Enable scholar modules
+  shell: "drush -y -u 1 --quiet en {{ scholar }}"
+  args:
+    chdir: "{{drupal_core_path }}/sites/{{ item }}"
+  with_items: "{{ institutions }}"
+
+- name: Enable utilities modules
+  shell: "drush -y -u 1 --quiet en {{ item[1] }}"
+  args:
+    chdir: "{{drupal_core_path }}/sites/{{ item[0] }}"
+  with_nested: 
+    - "{{ institutions }}"
+    - "{{ utilities }}"
+
+- name: Now that the module is downloaded and enabled ensure that colorbox lib is downloaded and in place.
+  shell: "drush -y -v colorbox-plugin"
+  args:
+    chdir: "{{drupal_core_path}}/sites/{{ item }}"
+  with_items: "{{ institutions }}"

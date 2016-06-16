@@ -1,12 +1,18 @@
 ---
-- name: Cloning islandora modules
-  git: clone=yes repo="https://github.com/islandora/{{item}}.git" dest="{{modules_dir}}/{{item}}" version=7.x update=no recursive=yes
+- name: Clone islandora modules
+  git: 
+    clone: yes
+    repo: "https://github.com/islandora/{{item}}.git" 
+    dest: "{{ drupal_core_path }}/sites/all/modules/{{ item }}" 
+    version: 7.x 
+    update: no 
+    recursive: yes
   with_items: "{{ islandora_modules_to_clone }}"
 
 - name: Set git config filemode off
   shell: git config core.filemode false
   args:
-    chdir: "{{modules_dir}}/{{item}}"
+    chdir: "{{ drupal_core_path }}/sites/all/modules/{{ item }}"
   with_items: "{{ islandora_modules_to_clone }}"
 
   # in order to 'generate' features in place:
@@ -15,11 +21,10 @@
     state: directory
     owner: www-data
     recurse: yes
-    path: "{{modules_dir}}"
-  when: not subsite
+    path: "{{ drupal_core_path }}/sites/all/modules"
 
-- name: Get non-islandora modules
+- name: Get other modules
   shell: "drush dl -n {{ item }} "
   args:
     chdir: "{{ drupal_core_path }}"
-  with_items: "{{ non_islandora_modules }}"
+  with_items: "{{ dependencies }}"

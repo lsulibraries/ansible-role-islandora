@@ -4,7 +4,7 @@
 - apt: name=php-pear
 - apt: name=doxygen
 
-- template: dest="/usr/local/bin/git-config" src=../templates/git-config.j2 mode=0755
+#- template: dest="/usr/local/bin/git-config" src=../templates/git-config.j2 mode=0755
 
 # phploc
 - stat: path=/usr/local/bin/phploc
@@ -26,9 +26,12 @@
 - stat: path=/usr/local/bin/pdepend
   register: pdepend
 
-- get_url: url=http://static.pdepend.org/php/latest/pdepend.phar dest=/usr/local/bin/pdepend
+- get_url: 
+    url: http://static.pdepend.org/php/latest/pdepend.phar
+    dest: /usr/local/bin/pdepend
+    validate_certs: False
 
-- file: path=/usr/local/bin/pdepend mode="0755" state=file 
+- file: path=/usr/local/bin/pdepend mode="0755" state=file
   when: pdepend.stat.exists == False
 
 # phpcb

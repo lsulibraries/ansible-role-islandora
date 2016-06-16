@@ -1,12 +1,4 @@
 ---
-- include: get_modules.yml
-  when: not subsite
-
-- include: get_libraries.yml
-  when: not subsite
-
-- include: enable_islandora_modules.yml
-- include: set_variables.yml
-- include: proxy.yml
-- include: php-devtools.yml
-  when: "{{ install_php_devtools }}"
+- include: system-dependencies.yml
+- include: java.yml
+- include: drupal.yml

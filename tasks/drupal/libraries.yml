@@ -2,7 +2,7 @@
 
 - name: Ensure that libraries directory exists.
   file: 
-    path: "{{libraries_dir}}"
+    path: "{{ drupal_core_path }}/sites/all/libraries"
     state: directory
     owner: www-data
     group: www-data
@@ -12,24 +12,24 @@
     clone: yes 
     update: no
     repo: "https://github.com/Islandora/tuque.git"
-    dest: "{{libraries_dir}}/tuque"
+    dest: "{{ drupal_core_path }}/sites/all/libraries/tuque"
 
 - name: clone bagit lib
   git:  
     clone: yes
     update: no
     repo: "https://github.com/scholarslab/BagItPHP.git"
-    dest: "{{libraries_dir}}/bagit"
+    dest: "{{ drupal_core_path }}/sites/all/libraries/bagit"
 
 - name: fmode 
   shell: git config core.filemode false
   args:
-    chdir: "{{libraries_dir}}/tuque"
+    chdir: "{{ drupal_core_path }}/sites/all/libraries/tuque"
 
 - name: fmode
   shell: git config core.filemode false
   args:
-    chdir: "{{libraries_dir}}/tuque"
+    chdir: "{{ drupal_core_path }}/sites/all/libraries/tuque"
 
 - name: Make global drush commands dir for islandora
   file: 
@@ -37,8 +37,8 @@
     state: directory
     recurse: yes
 
-- name: Move libraries drush defs into global dir
-  shell: "cp {{modules_dir}}/{{item}} /usr/local/share/drush/commands/islandora/"
+- name: Copy libraries drush defs into global dir
+  shell: "cp {{ drupal_core_path }}/sites/all/modules/{{item}} /usr/local/share/drush/commands/islandora/"
   with_items:
     - islandora_openseadragon/islandora_openseadragon.drush.inc
     - islandora_pdfjs/islandora_pdfjs.drush.inc
@@ -58,22 +58,22 @@
   shell: "drush -y -v videojs-plugin"
   args:
     chdir: "{{drupal_core_path}}"
-    creates: "{{libraries_dir}}/video-js"
+    creates: "{{ drupal_core_path }}/sites/all/libraries/video-js"
 
 - name: Ensure that pdf  library is downloaded and in place.
   shell: "drush -y -v pdfjs-plugin"
   args:
     chdir: "{{drupal_core_path}}"
-    creates: "{{libraries_dir}}/pdfjs"
+    creates: "{{ drupal_core_path }}/sites/all/libraries/pdfjs"
 
 - name: Ensure that bookreader library is downloaded and in place.
   shell: "drush -y -v iabookreader-plugin"
   args:
     chdir: "{{drupal_core_path}}"
-    creates: "{{libraries_dir}}/bookreader"
+    creates: "{{ drupal_core_path }}/sites/all/libraries/bookreader"
 
 - name: Ensure that seadragon lib is downloaded and in place.
   shell: "drush -y -v openseadragon-plugin"
   args:
     chdir: "{{drupal_core_path}}"
-    creates: "{{libraries_dir}}/openseadragon"
+    creates: "{{ drupal_core_path }}/sites/all/libraries/openseadragon"

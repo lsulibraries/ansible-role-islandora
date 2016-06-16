@@ -1,0 +1,13 @@
+---
+- name: Install islandora server side utilities
+  apt: 
+    name: "{{item}}"
+  with_items:
+    - imagemagick
+    - lame
+    - poppler-utils
+    - bibutils
+
+- include: system/tesseract.yml
+- include: system/ffmpeg.yml
+- include: system/fits.yml
