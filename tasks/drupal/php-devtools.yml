@@ -72,3 +72,23 @@
 
 - file: path=/usr/share/php/PHP/CodeSniffer/Standards/Drupal src=/usr/share/coder/coder_sniffer/Drupal state=link
 #  when: cs_exist.stat.exists == False
+
+###################
+# xdebug
+- name: Install xdebug
+  apt:
+    name: php-xdebug
+  when: environment_type == 'dev'
+
+- name: Xdebug config
+  blockinfile:
+    dest: /etc/php/7.0/mods-available/xdebug.ini
+    block: |
+      [xdebug]
+      zend_extension=xdebug.so
+      xdebug.default_enable=1
+      xdebug.remote_enable=1
+      xdebug.remote_handler=dbgp
+      xdebug.remote_host={{ xdebug_remote_host }}
+      xdebug.remote_port=9000
+  when: environment_type == 'dev'
