@@ -100,6 +100,7 @@
 - name: Copy GSearch transforms
   shell: "cp -r {{work_dir}}/basic-solr-config/islandora_transforms/* /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/FgsIndex/islandora_transforms"
 
+# use ansible file module instead...
 - name: Set ownership to Tomcat
   command: chown -hR tomcat7:tomcat7 /usr/local/solr /var/lib/tomcat7/webapps/fedoragsearch /var/lib/tomcat7/webapps/fedoragsearch.war 
 
