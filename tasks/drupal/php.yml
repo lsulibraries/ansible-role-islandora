@@ -1,7 +1,7 @@
 - name: Override default php settings
   template:
     src: 25-islandora.ini.j2
-    dest: /etc/php/7.0/apache2/conf.d/25-islandora.ini
+    dest: /etc/php5/apache2/conf.d/25-islandora.ini
     mode: 0644
     owner: root
     group: root
