@@ -1,4 +1,4 @@
 ---
 - include: system-dependencies.yml
 - include: java.yml
-- include: drupal.yml
+#- include: drupal.yml
