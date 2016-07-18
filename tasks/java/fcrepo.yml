@@ -126,7 +126,7 @@
   blockinfile:
     dest:  "{{ fedora_home }}/server/config/filter-drupal.xml"
     block: |    
-      <connection server="localhost" port="3306" dbname="{{ item }}" user="{{ item }}" password="{{ item }}">
+      <connection server="{{ mysql_login_host }}" port="3306" dbname="{{ item }}" user="{{ item }}" password="{{ item }}">
           <sql>
           <!--Different sql statement for each connection.  This is for drupal
           multisites that are setup using one database with table prefixes.
