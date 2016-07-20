@@ -1,6 +1,6 @@
 ---
 - include: java/tomcat7-admin.yml
 - include: java/djatoka.yml
-#- include: java/fcrepo.yml
-#- include: java/solr.yml
-#- include: java/gsearch.yml
+- include: java/fcrepo.yml
+- include: java/solr.yml
+- include: java/gsearch.yml

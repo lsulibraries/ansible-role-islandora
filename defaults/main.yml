@@ -59,7 +59,7 @@ islandora_modules_to_clone:
     - islandora_xacml_editor
     - islandora_xml_forms
     - islandora_xmlsitemap
-    - islandora_usage_stats
+#    - islandora_usage_stats
     - islandora_form_fieldpanel
     - islandora_altmetrics
     - objective_forms
@@ -111,7 +111,7 @@ utilities:
     - islandora_internet_archive_bookreader
     - islandora_bagit
     - islandora_batch_report
-    - islandora_usage_stats
+#    - islandora_usage_stats
     - islandora_form_fieldpanel
     - islandora_altmetrics
     - islandora_populator
