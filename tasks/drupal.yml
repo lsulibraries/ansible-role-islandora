@@ -5,5 +5,5 @@
 - include: drupal/variables.yml
 - include: drupal/proxy.yml # consider putting this in the fcrepo stage...
 - include: drupal/php.yml
-- include: drupal/php-devtools.yml
-  when: environment_type == 'dev'
+#- include: drupal/php-devtools.yml
+#  when: environment_type == 'dev'

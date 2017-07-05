@@ -21,11 +21,11 @@
   register: dgi_gsearch_extensions_present
 
 - name: Clone dgi_gsearch_extensions from DG github
-  git: repo=https://github.com/discoverygarden/dgi_gsearch_extensions.git dest="{{work_dir}}/dgi_gsearch_extensions" 
+  git: repo=https://github.com/discoverygarden/dgi_gsearch_extensions.git dest="{{work_dir}}/dgi_gsearch_extensions" version="v{{ gsearch_extensions_version }}"
   when: dgi_gsearch_extensions_present.stat.exists == False
 
 - name: "Check if we've already built the gsearch extension jars"
-  stat: path="{{work_dir}}/dgi_gsearch_extensions/target/gsearch_extensions-0.1.1-jar-with-dependencies.jar"
+  stat: path="{{work_dir}}/dgi_gsearch_extensions/target/gsearch_extensions-{{ gsearch_extensions_version }}-jar-with-dependencies.jar"
   register: gse_jar_present
 
 - name: Ensure mvn installed
@@ -88,8 +88,8 @@
 
 - name: Deploy dgi_gsearch_extensions
   copy:
-    src: "{{work_dir}}/dgi_gsearch_extensions/target/gsearch_extensions-0.1.1-jar-with-dependencies.jar"
-    dest: /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/lib/gsearch_extensions-0.1.1-jar-with-dependencies.jar
+    src: "{{work_dir}}dgi_gsearch_extensions/target/gsearch_extensions-{{ gsearch_extensions_version }}-jar-with-dependencies.jar"
+    dest: /var/lib/tomcat7/webapps/fedoragsearch/WEB-INF/lib/gsearch_extensions-{{ gsearch_extensions_version }}-jar-with-dependencies.jar
     remote_src: yes
 
 ## Solr & GSearch configurations

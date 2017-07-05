@@ -11,7 +11,7 @@ tomcat_xmx: "{{ (ansible_memtotal_mb*0.5)|int|abs }}m"
 fedora_version: 3.8.1
 auth_filter_fedora_version: 3.8.0
 solr_home: /usr/local/solr
-
+gsearch_extensions_version: 0.1.1
 
 ##########################
 # drupal vars

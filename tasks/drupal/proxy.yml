@@ -34,4 +34,4 @@
             LogLevel debug
 
   notify: 
-    - restart apache
+    - restart webserver
