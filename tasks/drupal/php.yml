@@ -5,4 +5,8 @@
     mode: 0644
     owner: root
     group: root
-  notify: restart webserver
+
+- name: restart apache2
+  service:
+    name: apache2
+    state: restarted

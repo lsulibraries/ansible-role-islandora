@@ -33,5 +33,7 @@
 
             LogLevel debug
 
-  notify: 
-    - restart webserver
+- name: restart apache2
+  service:
+    name: apache2
+    state: restarted
