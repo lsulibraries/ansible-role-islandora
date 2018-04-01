@@ -30,11 +30,12 @@
 - name: run ldconfig to update kdu_compress
   shell: /sbin/ldconfig    # https://groups.yahoo.com/neo/groups/kakadu_jpeg2000/conversations/topics/5487
 
-- name: update JAVA_OPTS
-  lineinfile:
-    regexp: 'JAVA_OPTS="\-Djava\.awt\.headless=true \-XX:MaxPermSize=256M \-Xmx1024m \-XX:\+UseConcMarkSweepGC "'
-    line: 'JAVA_OPTS="-Djava.awt.headless=true -Xmx{{ tomcat_xmx }} -Xms{{ tomcat_xmx }} -XX:MaxPermSize=500m -XX:+UseConcMarkSweepGC -Dkakadu.home=/usr/local/djatoka/bin/Linux-x86-64 -Djava.library.path=/usr/local/djatoka/lib/Linux-x86-64 -DLD_LIBRARY_PATH=/usr/local/djatoka/lib/Linux-x86-64 -Xloggc:/var/log/islandora/java/java_gc.log -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:ErrorFile=/var/log/islandora/java/java_error%p.log -XX:+UseParNewGC -XX:+DisableExplicitGC"'
-    dest: /etc/default/tomcat7
+# - name: update JAVA_OPTS
+#   lineinfile:
+#     # regexp: 'JAVA_OPTS="\-Djava\.awt\.headless=true \-XX:MaxPermSize=256M \-Xmx1024m \-XX:\+UseConcMarkSweepGC "'
+#     insertafter: EOF
+#     line: JAVA_OPTS="-Djava.awt.headless=true -Xmx{{ tomcat_xmx }} -Xms{{ tomcat_xmx }} -XX:MaxPermSize=500m -XX:+UseConcMarkSweepGC -Dkakadu.home=/usr/local/djatoka/bin/Linux-x86-64 -Djava.library.path=/usr/local/djatoka/lib/Linux-x86-64 -DLD_LIBRARY_PATH=/usr/local/djatoka/lib/Linux-x86-64 -Xloggc:/var/log/islandora/java/java_gc.log -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:ErrorFile=/var/log/islandora/java/java_error%p.log -XX:+UseParNewGC -XX:+DisableExplicitGC"
+#     path: /etc/default/tomcat7
 
 - name: create islandora dir
   file:
