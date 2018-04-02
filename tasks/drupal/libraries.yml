@@ -1,27 +1,27 @@
 ---
 
 - name: Ensure that libraries directory exists.
-  file: 
+  file:
     path: "{{ drupal_core_path }}/sites/all/libraries"
     state: directory
     owner: www-data
     group: www-data
 
 - name: clone tuque
-  git:  
-    clone: yes 
+  git:
+    clone: yes
     update: no
     repo: "https://github.com/Islandora/tuque.git"
     dest: "{{ drupal_core_path }}/sites/all/libraries/tuque"
 
 - name: clone bagit lib
-  git:  
+  git:
     clone: yes
     update: no
     repo: "https://github.com/scholarslab/BagItPHP.git"
     dest: "{{ drupal_core_path }}/sites/all/libraries/bagit"
 
-- name: fmode 
+- name: fmode
   shell: git config core.filemode false
   args:
     chdir: "{{ drupal_core_path }}/sites/all/libraries/tuque"
@@ -32,7 +32,7 @@
     chdir: "{{ drupal_core_path }}/sites/all/libraries/tuque"
 
 - name: Make global drush commands dir for islandora
-  file: 
+  file:
     path: /usr/local/share/drush/commands/islandora
     state: directory
     recurse: yes
@@ -51,29 +51,24 @@
     chdir: '{{drupal_core_path}}'
 
 - name: Ensure that unzip is available.
-  apt: 
+  apt:
     name: unzip
 
-- name: Ensure that videojs library is downloaded and in place.
-  shell: "drush -y -v videojs-plugin"
-  args:
-    chdir: "{{drupal_core_path}}"
-    creates: "{{ drupal_core_path }}/sites/all/libraries/video-js"
-
-- name: Ensure that pdf  library is downloaded and in place.
-  shell: "drush -y -v pdfjs-plugin"
-  args:
-    chdir: "{{drupal_core_path}}"
-    creates: "{{ drupal_core_path }}/sites/all/libraries/pdfjs"
-
-- name: Ensure that bookreader library is downloaded and in place.
-  shell: "drush -y -v iabookreader-plugin"
-  args:
-    chdir: "{{drupal_core_path}}"
-    creates: "{{ drupal_core_path }}/sites/all/libraries/bookreader"
-
 - name: Ensure that seadragon lib is downloaded and in place.
-  shell: "drush -y -v openseadragon-plugin"
-  args:
-    chdir: "{{drupal_core_path}}"
-    creates: "{{ drupal_core_path }}/sites/all/libraries/openseadragon"
+  unarchive:
+    src: https://github.com/openseadragon/openseadragon/releases/download/v2.3.1/openseadragon-bin-2.3.1.zip
+    dest: "{{ drupal_core_path }}/sites/all/libraries/"
+    remote_src: yes
+
+- name: symlink to version lib
+  file:
+    path: "{{ drupal_core_path }}/sites/all/libraries/openseadragon"
+    src: "{{ drupal_core_path }}/sites/all/libraries/openseadragon-bin-2.3.1"
+    state: link
+
+# - name: Ensure that seadragon lib is downloaded and in place.
+#   shell: "drush -y -v openseadragon-plugin"
+#   args:
+#     chdir: "{{drupal_core_path}}"
+#     creates: "{{ drupal_core_path }}/sites/all/libraries/openseadragon"
+#

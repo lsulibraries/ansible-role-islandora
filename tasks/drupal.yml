@@ -2,6 +2,7 @@
 - include: drupal/modules.yml
 - include: drupal/libraries.yml
 - include: drupal/enable.yml
+- include: drupal/post-enable.yml
 - include: drupal/variables.yml
 - include: drupal/proxy.yml # consider putting this in the fcrepo stage...
 - include: drupal/php.yml
